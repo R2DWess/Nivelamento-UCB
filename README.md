@@ -1,5 +1,8 @@
-![Cadastrar número indeterminado de cadastro de pessoas;](img/logo.jpg)
-# PROJETO DE NÍVELAMENTO - Universidade Católica de Brasília:
+<p align="center">
+  <img src="img/logo.jpg" alt="Cadastrar número indeterminado de cadastro de pessoas;">
+</p>
+
+## PROJETO DE NÍVELAMENTO - Universidade Católica de Brasília:
 
 **Criar um programa que permita ao usuário:**
 

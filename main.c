@@ -89,13 +89,13 @@ void cadastrarPessoa() {
 void alterarPessoa() {
     int indice = obterIndicePessoa();
     if (indice == -1) {
-        printf("Pessoa nÃ£o encontrada.\n");
+        printf("Pessoa nao encontrada.\n");
         return;
     }
 
     Pessoa* p = &pessoas[indice];
     printf("Alterando dados de: %s\n", p->nome);
-    printf("Digite o novo nome (ou deixe em branco para nÃ£o alterar): ");
+    printf("Digite o novo nome (ou deixe em branco para nao alterar): ");
     char temp[TAM_NOME];
     fgets(temp, TAM_NOME, stdin); temp[strcspn(temp, "\n")] = 0;
     if (strlen(temp) > 0) strcpy(p->nome, temp);
@@ -107,7 +107,7 @@ void alterarPessoa() {
 void excluirPessoa() {
     int indice = obterIndicePessoa();
     if (indice == -1) {
-        printf("Pessoa nÃ£o encontrada.\n");
+        printf("Pessoa nao encontrada.\n");
         return;
     }
 
