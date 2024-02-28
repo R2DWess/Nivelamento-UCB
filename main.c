@@ -27,6 +27,7 @@ void exibirPessoas();
 int obterIndicePessoa();
 
 int main() {
+    setlocale(LC_ALL, "Portuguese");
     int opcao;
     do {
         printf("\nMenu:\n");
