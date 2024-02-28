@@ -29,6 +29,7 @@ int obterIndicePessoa();
 int main() {
     setlocale(LC_ALL, "Portuguese");
     int opcao;
+    int numPessoa;
     do {
         printf("\nMenu:\n");
         printf("1. Cadastrar pessoa\n");
@@ -45,7 +46,11 @@ int main() {
                 cadastrarPessoa();
                 break;
             case 2:
-                alterarPessoa();
+                exibirPessoas();
+                printf("\nDigite o numero da Pessoa que deseja Alterar: ");
+                scanf("%d", &numPessoa);
+                numPessoa--;
+                alterarPessoa(&pessoas[numPessoa]);
                 break;
             case 3:
                 excluirPessoa();
@@ -86,22 +91,30 @@ void cadastrarPessoa() {
     printf("Pessoa cadastrada com sucesso!\n");
 }
 
-void alterarPessoa() {
-    int indice = obterIndicePessoa();
-    if (indice == -1) {
-        printf("Pessoa nÃ£o encontrada.\n");
+void alterarPessoa(Pessoa* altP) {
+    int escolha;
+
+    printf("Deseja alteraro os dados de %s?\n", altP->nome);
+    printf("1. Sim\n2.Não\n");
+    scanf("%d", &escolha);
+
+    if(escolha == 1){
+        printf("Digite o novo nome: ");
+        scanf(" %[^\n]", &*altP->nome); fflush(stdin);
+        
+        printf("Digite a nova data de nascimento (dd/mm/aaaa): ");
+        scanf(" %[^\n]", &*altP->dataNascimento); fflush(stdin);
+
+        printf("Digite a nova idade: ");
+        scanf("%d", &altP->idade); getchar();
+        
+        printf("Digite o novo endereco: ");
+        scanf(" %[^\n]", &*altP->endereco); fflush(stdin);
+
+        printf("Dados alterados com sucesso!\n");
+    } else{
         return;
     }
-
-    Pessoa* p = &pessoas[indice];
-    printf("Alterando dados de: %s\n", p->nome);
-    printf("Digite o novo nome (ou deixe em branco para nÃ£o alterar): ");
-    char temp[TAM_NOME];
-    fgets(temp, TAM_NOME, stdin); temp[strcspn(temp, "\n")] = 0;
-    if (strlen(temp) > 0) strcpy(p->nome, temp);
-
-
-    printf("Dados alterados com sucesso!\n");
 }
 
 void excluirPessoa() {
