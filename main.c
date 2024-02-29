@@ -1,14 +1,17 @@
+// BIBLIOTECAS:
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
 
+// CONSTANTES:
 #define MAX_PESSOAS 100
 #define TAM_NOME 50
 #define TAM_ENDERECO 100
 #define TAM_CPF 15
 #define TAM_DATA_NASC 11
 
+// ESTRUTURA DE DADOS:
 typedef struct {
     char nome[TAM_NOME];
     char dataNascimento[TAM_DATA_NASC];
@@ -17,15 +20,19 @@ typedef struct {
     char endereco[TAM_ENDERECO];
 } Pessoa;
 
+// VARIÁVEIS:
 Pessoa pessoas[MAX_PESSOAS];
 int quantidadePessoas = 0;
 
+
+// FUNÇÃO DE MANIPULAÇÃO
 void cadastrarPessoa();
 void alterarPessoa();
 void excluirPessoa();
 void exibirPessoas();
 int obterIndicePessoa();
 
+// FUNÇÃO PRINCIPAL
 int main() {
     setlocale(LC_ALL, "Portuguese");
     int opcao;
@@ -40,6 +47,7 @@ int main() {
         scanf("%d", &opcao);
         getchar(); 
 
+// ESTRUTURA DE DECISÃO:
         switch(opcao) {
             case 1:
                 cadastrarPessoa();
@@ -64,6 +72,7 @@ int main() {
     return 0;
 }
 
+// FUNÇÕES DE MANIPULAÇÃO DE DADOS:
 void cadastrarPessoa() {
     if (quantidadePessoas >= MAX_PESSOAS) {
         printf("Limite de pessoas atingido.\n");
@@ -86,6 +95,7 @@ void cadastrarPessoa() {
     printf("Pessoa cadastrada com sucesso!\n");
 }
 
+// ALTERA OS DADOS DE UMA PESSOA CADASTRADA
 void alterarPessoa() {
     int indice = obterIndicePessoa();
     if (indice == -1) {
@@ -119,6 +129,7 @@ void alterarPessoa() {
     printf("Dados alterados com sucesso!\n");
 }
 
+// EXCLUI UMA PESSOA DO SISTEMA
 void excluirPessoa() {
     int indice = obterIndicePessoa();
     if (indice == -1) {
@@ -133,6 +144,7 @@ void excluirPessoa() {
     printf("Pessoa excluída com sucesso!\n");
 }
 
+// EXIBE TODAS AS PESSOAS CADASTRADAS NO SISTEMA
 void exibirPessoas() {
     printf("Lista de Pessoas:\n");
     for (int i = 0; i < quantidadePessoas; i++) {
@@ -142,6 +154,7 @@ void exibirPessoas() {
     }
 }
 
+// OBTEM O ÍNDICE DE UMA PESSOA
 int obterIndicePessoa() {
     char cpfProcurado[TAM_CPF];
     printf("Digite o CPF da pessoa: ");
