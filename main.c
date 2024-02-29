@@ -27,6 +27,7 @@ void exibirPessoas();
 int obterIndicePessoa();
 
 int main() {
+    setlocale(LC_ALL, "Portuguese");
     int opcao;
     do {
         printf("\nMenu:\n");
@@ -35,7 +36,7 @@ int main() {
         printf("3. Excluir pessoa\n");
         printf("4. Exibir todas as pessoas\n");
         printf("0. Sair\n");
-        printf("Escolha uma opcao: ");
+        printf("Escolha uma opção: ");
         scanf("%d", &opcao);
         getchar(); 
 
@@ -56,7 +57,7 @@ int main() {
                 printf("Saindo...\n");
                 break;
             default:
-                printf("Opcao invalida!\n");
+                printf("Opção inválida!\n");
         }
     } while(opcao != 0);
 
@@ -85,80 +86,69 @@ void cadastrarPessoa() {
     printf("Pessoa cadastrada com sucesso!\n");
 }
 
-  void alterarPessoa() {
-    char cpfProcurado[TAM_CPF];
-    printf("Digite o CPF da pessoa: ");
-    fgets(cpfProcurado, TAM_CPF, stdin);
-    cpfProcurado[strcspn(cpfProcurado, "\n")] = 0;
-
-    int indice = -1;
-    for (int i = 0; i < quantidadePessoas; i++) {
-      if (strcmp(pessoas[i].cpf, cpfProcurado) == 0) {
-        indice = i;
-        break;
-      }
-    }
-
+void alterarPessoa() {
+    int indice = obterIndicePessoa();
     if (indice == -1) {
-      printf("Pessoa não encontrada.\n");
-      return;
+        printf("Pessoa não encontrada.\n");
+        return;
     }
 
     Pessoa* p = &pessoas[indice];
     printf("Alterando dados de: %s\n", p->nome);
+
     printf("Digite o novo nome (ou deixe em branco para não alterar): ");
     char temp[TAM_NOME];
     fgets(temp, TAM_NOME, stdin); temp[strcspn(temp, "\n")] = 0;
     if (strlen(temp) > 0) strcpy(p->nome, temp);
 
+    printf("Digite a nova data de nascimento (ou deixe em branco para não alterar): ");
+    fgets(temp, TAM_DATA_NASC, stdin); temp[strcspn(temp, "\n")] = 0;
+    if (strlen(temp) > 0) strcpy(p->dataNascimento, temp);
+
+    printf("Digite a nova idade: ");
+    scanf("%d", &p->idade); getchar();
+
+    printf("Digite o novo CPF (ou deixe em branco para não alterar): ");
+    fgets(temp, TAM_CPF, stdin); temp[strcspn(temp, "\n")] = 0;
+    if (strlen(temp) > 0) strcpy(p->cpf, temp);
+
+    printf("Digite o novo endereço (ou deixe em branco para não alterar): ");
+    fgets(temp, TAM_ENDERECO, stdin); temp[strcspn(temp, "\n")] = 0;
+    if (strlen(temp) > 0) strcpy(p->endereco, temp);
 
     printf("Dados alterados com sucesso!\n");
 }
 
 void excluirPessoa() {
-  char cpfProcurado[TAM_CPF];
-  printf("Digite o CPF da pessoa: ");
-  fgets(cpfProcurado, TAM_CPF, stdin);
-  cpfProcurado[strcspn(cpfProcurado, "\n")] = 0;
-
-  int indice = -1;
-  for (int i = 0; i < quantidadePessoas; i++) {
-    if (strcmp(pessoas[i].cpf, cpfProcurado) == 0) {
-      indice = i;
-      break;
+    int indice = obterIndicePessoa();
+    if (indice == -1) {
+        printf("Pessoa não encontrada.\n");
+        return;
     }
-  }
 
-  if (indice == -1) {
-    printf("Pessoa não encontrada.\n");
-    return;
-  }
-
-  // Deslocamento dos elementos da lista após a exclusão
-  for (int i = indice; i < quantidadePessoas - 1; i++) {
-    pessoas[i] = pessoas[i + 1];
-  }
-
-  quantidadePessoas--;
-  printf("Pessoa excluída com sucesso!\n");
+    for (int i = indice; i < quantidadePessoas - 1; i++) {
+        pessoas[i] = pessoas[i + 1];
+    }
+    quantidadePessoas--;
+    printf("Pessoa excluída com sucesso!\n");
 }
 
 void exibirPessoas() {
     printf("Lista de Pessoas:\n");
     for (int i = 0; i < quantidadePessoas; i++) {
         Pessoa p = pessoas[i];
-        printf("%d. Nome: %s, Data de Nascimento: %s, Idade: %d, CPF: %s, EndereÃ§o: %s\n",
+        printf("%d. Nome: %s, Data de Nascimento: %s, Idade: %d, CPF: %s, Endereço: %s\n",
                i + 1, p.nome, p.dataNascimento, p.idade, p.cpf, p.endereco);
     }
 }
 
 int obterIndicePessoa() {
-    char nomeProcurado[TAM_NOME];
-    printf("Digite o nome da pessoa: ");
-    fgets(nomeProcurado, TAM_NOME, stdin); nomeProcurado[strcspn(nomeProcurado, "\n")] = 0;
+    char cpfProcurado[TAM_CPF];
+    printf("Digite o CPF da pessoa: ");
+    fgets(cpfProcurado, TAM_CPF, stdin); cpfProcurado[strcspn(cpfProcurado, "\n")] = 0;
 
     for (int i = 0; i < quantidadePessoas; i++) {
-        if (strcmp(pessoas[i].nome, nomeProcurado) == 0) {
+        if (strcmp(pessoas[i].cpf, cpfProcurado) == 0) {
             return i;
         }
     }
