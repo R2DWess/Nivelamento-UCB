@@ -36,7 +36,7 @@ int main() {
         printf("3. Excluir pessoa\n");
         printf("4. Exibir todas as pessoas\n");
         printf("0. Sair\n");
-        printf("Escolha uma opção: ");
+        printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
         getchar(); 
 
@@ -89,30 +89,30 @@ void cadastrarPessoa() {
 void alterarPessoa() {
     int indice = obterIndicePessoa();
     if (indice == -1) {
-        printf("Pessoa não encontrada.\n");
+        printf("Pessoa nao encontrada.\n");
         return;
     }
 
     Pessoa* p = &pessoas[indice];
     printf("Alterando dados de: %s\n", p->nome);
 
-    printf("Digite o novo nome (ou deixe em branco para não alterar): ");
+    printf("Digite o novo nome (ou deixe em branco para nao alterar): ");
     char temp[TAM_NOME];
     fgets(temp, TAM_NOME, stdin); temp[strcspn(temp, "\n")] = 0;
     if (strlen(temp) > 0) strcpy(p->nome, temp);
 
-    printf("Digite a nova data de nascimento (ou deixe em branco para não alterar): ");
+    printf("Digite a nova data de nascimento (ou deixe em branco para nao alterar): ");
     fgets(temp, TAM_DATA_NASC, stdin); temp[strcspn(temp, "\n")] = 0;
     if (strlen(temp) > 0) strcpy(p->dataNascimento, temp);
 
     printf("Digite a nova idade: ");
     scanf("%d", &p->idade); getchar();
 
-    printf("Digite o novo CPF (ou deixe em branco para não alterar): ");
+    printf("Digite o novo CPF (ou deixe em branco para nao alterar): ");
     fgets(temp, TAM_CPF, stdin); temp[strcspn(temp, "\n")] = 0;
     if (strlen(temp) > 0) strcpy(p->cpf, temp);
 
-    printf("Digite o novo endereço (ou deixe em branco para não alterar): ");
+    printf("Digite o novo endereço (ou deixe em branco para nao alterar): ");
     fgets(temp, TAM_ENDERECO, stdin); temp[strcspn(temp, "\n")] = 0;
     if (strlen(temp) > 0) strcpy(p->endereco, temp);
 
@@ -122,7 +122,7 @@ void alterarPessoa() {
 void excluirPessoa() {
     int indice = obterIndicePessoa();
     if (indice == -1) {
-        printf("Pessoa não encontrada.\n");
+        printf("Pessoa nao encontrada.\n");
         return;
     }
 
